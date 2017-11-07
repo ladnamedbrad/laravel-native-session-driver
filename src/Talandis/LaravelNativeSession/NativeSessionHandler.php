@@ -17,14 +17,18 @@ class NativeSessionHandler implements SessionHandlerInterface
    	 * Create a new raw PHP session handler instance.
    	 *
    	 * @param string $namespace Keep session data in a $_SESSION sub-array
+     * @param string $cookieName The cookie that will match the session name for our native driver
    	 */
-   	public function __construct($namespace = null)
+   	public function __construct($namespace = null, $cookieName)
    	{
-           // Laravel 5 registers a callback function to handle unserializing session objects, which means you get
-           // a fatal error if the object can't be unserialized (which I get since I'm sharing session with another app).
-           // This is probably NOT the best way to handle the situation, need to sort this out.
-           ini_restore('unserialize_callback_func');
-
+        
+        // Laravel 5 registers a callback function to handle unserializing session objects, which means you get
+        // a fatal error if the object can't be unserialized (which I get since I'm sharing session with another app).
+        // This is probably NOT the best way to handle the situation, need to sort this out.
+        ini_restore('unserialize_callback_func');
+        
+        session_name($cookieName);
+        
    		if (session_status() == PHP_SESSION_NONE) {
    			session_start();
    		}
