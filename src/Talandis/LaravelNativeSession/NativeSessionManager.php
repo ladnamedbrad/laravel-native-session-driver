@@ -15,7 +15,8 @@ class NativeSessionManager extends SessionManager
     protected function createNativeDriver()
     {
         $path = $this->app['config']['session.files'];
+        $cookieName = $this->app['config']['session.cookie'];
 
-        return $this->buildSession(new NativeSessionHandler($path));
+        return $this->buildSession(new NativeSessionHandler($path, $cookieName));
     }
 }
