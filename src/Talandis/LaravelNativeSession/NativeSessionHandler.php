@@ -17,7 +17,7 @@ class NativeSessionHandler implements SessionHandlerInterface
    	 * Create a new raw PHP session handler instance.
    	 *
    	 * @param string $namespace Keep session data in a $_SESSION sub-array
-     * @param string $cookieName The cookie that will match the session name for our native driver
+   	 * @param string $cookieName The cookie that will match the session name for our native driver
    	 */
    	public function __construct($namespace = null, $cookieName)
    	{
